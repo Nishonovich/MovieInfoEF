@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieInfoEF.Data.DbContexts;
-using MovieInfoEF.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +41,7 @@ namespace MovieInfoEF.Data.Repositories
             => _dbSet.FirstOrDefaultAsync(expression);
 
         public Task<T> UpdateAsync(T entity)
-            => Task.FromResult(_dbSet.Update(entity).Entity);
+            => Task.FromResult(_dbSet.Update(entity).Entity);// servisda id bo'yicha topaman
 
     }
 }

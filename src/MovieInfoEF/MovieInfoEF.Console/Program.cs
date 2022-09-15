@@ -1,5 +1,4 @@
 ﻿using MovieInfoEF.Data.DbContexts;
-using MovieInfoEF.Data.Interfaces;
 using MovieInfoEF.Data.Repositories;
 using MovieInfoEF.Domain.Models;
 using System;

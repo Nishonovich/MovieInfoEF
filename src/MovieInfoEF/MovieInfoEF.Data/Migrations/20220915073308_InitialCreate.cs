@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MovieInfoEF.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,6 +72,7 @@ namespace MovieInfoEF.Data.Migrations
                     MovieYear = table.Column<DateOnly>(type: "date", nullable: false),
                     Duration = table.Column<string>(type: "text", nullable: false),
                     Language = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
+                    ImagePath = table.Column<string>(type: "text", nullable: false),
                     PremiereDate = table.Column<DateOnly>(type: "date", nullable: false),
                     Country = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateOnly>(type: "date", nullable: false),

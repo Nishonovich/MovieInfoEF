@@ -18,6 +18,7 @@ namespace MovieInfoEF.Domain.Models
         public String Duration { get; set; } = String.Empty;
         [MaxLength(32)]
         public String Language { get; set; } = String.Empty;
+        public String ImagePath { get; set; } = String.Empty;
         public DateOnly PremiereDate { get; set; }
         public Country Country { get; set; }
         public Movie()
