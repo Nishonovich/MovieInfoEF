@@ -12,14 +12,14 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MovieInfoEF.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220914075558_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220915073308_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -140,6 +140,10 @@ namespace MovieInfoEF.Data.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("text");
 
