@@ -7,13 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MovieInfoEF.Data\MovieInfoEF.Data.csproj" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO%27s\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\MovieInfoEF.Data\MovieInfoEF.Data.csproj" />
   </ItemGroup>
 
 </Project>

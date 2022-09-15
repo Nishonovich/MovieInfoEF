@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieInfoEF.Data.Interfaces
+namespace MovieInfoEF.Data.Repositories
 {
     // krat amallar generic qilib ketilgan 
     public interface IGenericRepository<T>
