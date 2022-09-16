@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MovieInfoEF.Domain.Models
 {
-    public class Genres : BaseEntity
+    public class Genre : BaseEntity
     {
         [MaxLength(32)]
         public string Name { get; set; } = String.Empty;

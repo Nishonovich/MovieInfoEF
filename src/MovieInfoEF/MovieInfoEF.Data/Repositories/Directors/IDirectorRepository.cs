@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieInfoEF.Data.Repositories.Directors
 {
-    internal interface IDirectorsRepository : IGenericRepository<Director>
+    public interface IDirectorRepository : IGenericRepository<Director>
     {
     }
 }
