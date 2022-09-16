@@ -13,13 +13,13 @@ namespace MovieInfoEF.Service.Interfaces
     {
         Task<ActorViewModel> CreateAsync(ActorCreateDto dto);
 
-        Task<ActorViewModel> UpdateAsync(ActorCreateDto dto);
+        Task<ActorViewModel> UpdateAsync(Int64 id, ActorCreateDto dto);
 
         Task<bool> DeleteAsync(Expression<Func<Actor, bool>> expression);
 
-        Task<ActorViewModel> GetAsync(Expression<Func<Actor, bool>> expression);
+        Task<ActorViewModel?> GetAsync(Expression<Func<Actor, bool>> expression);
 
-        Task<IEnumerable<ActorViewModel>> GetAllAsync(Expression<Func<Actor, bool>> expression);
+        Task<IEnumerable<ActorViewModel>> GetAllAsync(Expression<Func<Actor, bool>>? expression = null);
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MovieInfoEF.Domain.Models;
 using MovieInfoEF.Service.DTO_s.Actors;
+using MovieInfoEF.Service.DTO_s.Director;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,13 @@ namespace MovieInfoEF.Service.Mappers
         public MappingProfile()
         {
             CreateMap<Actor, ActorCreateDto>().ReverseMap();
+            CreateMap<Actor, ActorViewModel>().ReverseMap();
+            CreateMap<IQueryable<Actor>, List<ActorViewModel>>().ReverseMap();
+
+            CreateMap<Director, DirectorCreateDto>().ReverseMap();
+            CreateMap<Director, DirectorViewModel>().ReverseMap();
+
+
         }
     }
 }

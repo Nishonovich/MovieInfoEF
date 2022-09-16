@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MovieInfoEF.Data.Repositories.Genreses
 {
-    public class GenresesRepository : GenericRepository<Genres>, IGenresRepository
+    public class GenreseRepository : GenericRepository<Genre>, IGenreRepository
     {
-        public GenresesRepository(AppDbContext appContext) : base(appContext)
+        public GenreseRepository(AppDbContext appContext) : base(appContext)
         {
         }
     }

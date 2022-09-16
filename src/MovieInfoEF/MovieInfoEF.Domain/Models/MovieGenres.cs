@@ -12,13 +12,13 @@ namespace MovieInfoEF.Domain.Models
         public Int64 MovieId { get; set; }
         public virtual Movie Movie { get; set; }
         public Int64 GenresId { get; set; }
-        public virtual Genres Genres { get; set; }
+        public virtual Genre Genres { get; set; }
 
         // foren key qilinganda warningni hal qilsh uchun constructirda obekt olib qo'yish k/k
         public MovieGenres()
         {
             Movie = new Movie();
-            Genres = new Genres();
+            Genres = new Genre();
         }
     }
 }
