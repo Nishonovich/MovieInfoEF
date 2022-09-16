@@ -2,6 +2,7 @@
 using MovieInfoEF.Data.DbContexts;
 using MovieInfoEF.Data.Repositories.Genreses;
 using MovieInfoEF.Domain.Models;
+using MovieInfoEF.Service.DTO_s.Actors;
 using MovieInfoEF.Service.DTO_s.Director;
 using MovieInfoEF.Service.DTO_s.Genres;
 using MovieInfoEF.Service.Interfaces;
@@ -42,24 +43,49 @@ namespace MovieInfoEF.Service.Services
            
         }
 
-        public Task<bool> DeleteAsync(Expression<Func<Genre, bool>> expression)
+        public async Task<bool> DeleteAsync(Expression<Func<Genre, bool>> expression)
         {
-            throw new NotImplementedException();
+            var allGenre = _genreRepository.GetAll(expression);
+         
+            if (!allGenre.Any())
+            {
+                throw new Exception("Genre not found");
+            }
+
+            _genreRepository.DeleteRange(allGenre);
+            await _appDbContext.SaveChangesAsync();
+
+            return true;
         }
 
         public Task<IEnumerable<GenreViewModel>> GetAllAsync(Expression<Func<Genre, bool>>? expression = null)
         {
-            throw new NotImplementedException();
+            var result = _genreRepository.GetAll(expression);
+            return Task.FromResult(_mapper.Map<IEnumerable<GenreViewModel>>(result));
         }
 
-        public Task<GenreViewModel?> GetAsync(Expression<Func<Genre, bool>> expression)
+        public async Task<GenreViewModel?> GetAsync(Expression<Func<Genre, bool>> expression)
         {
-            throw new NotImplementedException();
+            
+            var result = await _genreRepository.GetAsync(expression);
+
+            return _mapper.Map<GenreViewModel?>(result);
         }
 
-        public Task<GenreViewModel> UpdateAsync(long id, GenreCreateDto dto)
+        public async Task<GenreViewModel> UpdateAsync(Int64 id, GenreCreateDto dto)
         {
-            throw new NotImplementedException();
+            var genre = await _genreRepository.GetAsync(p => p.Id == id);
+            if (genre is null)
+            {
+                throw new Exception("Bunday actor yo'q");
+            }
+
+            var genreUp = _mapper.Map(dto, genre);
+       
+            await _genreRepository.UpdateAsync(genreUp);
+            await _appDbContext.SaveChangesAsync();
+
+            return _mapper.Map<GenreViewModel>(genreUp);
         }
     }
 }

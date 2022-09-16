@@ -25,7 +25,6 @@ namespace MovieInfoEF.Service.Services
         // constructor 
         public ActorService()
         {
-            
             _appDbContext = new AppDbContext();
             _actorRepository = new ActorRepository(_appDbContext);
             _mapper = new Mapper( new MapperConfiguration(p => p.AddProfile<MappingProfile>()));
@@ -33,7 +32,7 @@ namespace MovieInfoEF.Service.Services
         public async Task<ActorViewModel> CreateAsync(ActorCreateDto dto)
         {
             var result = await _actorRepository.GetAsync(p => p.FirstName.Equals(dto.FirstName)
-            && p.LastName.Equals(dto.LastName) && p.BirthDate.Equals(dto.BirthDate));
+                         && p.LastName.Equals(dto.LastName) && p.BirthDate.Equals(dto.BirthDate));
 
             if(result is not null) 
             {

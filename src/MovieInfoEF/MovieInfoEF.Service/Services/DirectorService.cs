@@ -28,12 +28,10 @@ namespace MovieInfoEF.Service.Services
             _mapper = new Mapper(new MapperConfiguration(p => p.AddProfile<MappingProfile>()));
         }
 
-
         public async Task<DirectorViewModel> CreateAsync(DirectorCreateDto dto)
         {
             var res = await _directorRepository.GetAsync(p => p.FirstName.Equals(dto.FirstName)
-            && p.LastName.Equals(dto.LastName) && p.BirthDate.Equals(dto.BirthDate));
-
+                      && p.LastName.Equals(dto.LastName) && p.BirthDate.Equals(dto.BirthDate));
 
             if (res is not null)
             {
@@ -64,7 +62,6 @@ namespace MovieInfoEF.Service.Services
         {
             var result = _directorRepository.GetAll(expression);
 
-            // 
             return Task.FromResult(_mapper.Map<IEnumerable<DirectorViewModel>>(result));
         }
 
@@ -77,21 +74,23 @@ namespace MovieInfoEF.Service.Services
 
         public async Task<DirectorViewModel> UpdateAsync(Int64 id, DirectorCreateDto dto)
         {
-         
             var director = await _directorRepository.GetAsync( p => p.Id == id);
 
             if (director is null)
-            {
                 throw new Exception("Bunday director yo'q");
-            }
+
             if (dto.FirstName.Equals(string.Empty))
                 dto.FirstName = director.FirstName;
+
             if (dto.LastName.Equals(string.Empty))
                 dto.LastName = director.LastName;
+
             if (dto.Hobby.Equals(string.Empty))
                 dto.Hobby = director.Hobby;
+
             if (dto.IsMale == null)
                 dto.IsMale = director.IsMale;
+
             if (dto.Position.Equals(string.Empty))
                 dto.Position = director.Position;
            
