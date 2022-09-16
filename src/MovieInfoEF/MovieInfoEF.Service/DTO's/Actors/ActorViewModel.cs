@@ -16,10 +16,7 @@ namespace MovieInfoEF.Service.DTO_s.Actors
         public string LastName { get; set; } = String.Empty;
         public string Hobby { get; set; } = String.Empty;
         public bool? IsMale { get; set; }
-        public DateOnly BirthDate { get; set; }
-        public IEnumerable<Movie>? Movies { get; set; }
-
-
+        public DateOnly BirthDate { get; set; }        
 
     }
 }

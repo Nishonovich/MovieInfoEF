@@ -14,7 +14,7 @@ namespace MovieInfoEF.Data.DbContexts
         // db table lar nomlari 
         public virtual DbSet<Actor> Actors { get; set; } = null!; // db table null emas degani 
         public virtual DbSet<Director> Directors { get; set; } = null!;
-        public virtual DbSet<Genres> Genres { get; set; } = null!;
+        public virtual DbSet<Genre> Genres { get; set; } = null!;
         public virtual DbSet<Movie> Movies { get; set; } = null!;
         public virtual DbSet<MovieDirector> MoversDirectors { get; set; } = null!;
         public virtual DbSet<MovieGenres> MovieGenres { get; set; } = null!;

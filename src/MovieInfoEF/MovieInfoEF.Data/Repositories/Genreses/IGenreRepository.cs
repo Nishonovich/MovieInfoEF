@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieInfoEF.Data.Repositories.Genreses
 {
-    internal interface IGenresRepository : IGenericRepository<Genres>
+    public interface IGenreRepository : IGenericRepository<Genre>
     {
     }
 }

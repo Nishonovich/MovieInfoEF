@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MovieInfoEF.Data.Repositories.Directors
 {
-    public class DirectorRepository : GenericRepository<Director>, IDirectorsRepository
+    public class DirectorRepository : GenericRepository<Director>, IDirectorRepository
     {
         public DirectorRepository(AppDbContext appContext) : base(appContext)
         {
