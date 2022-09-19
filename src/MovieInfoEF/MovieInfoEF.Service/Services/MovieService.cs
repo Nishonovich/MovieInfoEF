@@ -1,8 +1,14 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MovieInfoEF.Data.DbContexts;
+using MovieInfoEF.Data.Repositories.Directors;
 using MovieInfoEF.Data.Repositories.Genreses;
+using MovieInfoEF.Data.Repositories.MovieDrectors;
+using MovieInfoEF.Data.Repositories.MovieGenress;
+using MovieInfoEF.Data.Repositories.MovieHeros;
 using MovieInfoEF.Data.Repositories.Movies;
 using MovieInfoEF.Domain.Models;
+using MovieInfoEF.Service.DTO_s.Actors;
 using MovieInfoEF.Service.DTO_s.Director;
 using MovieInfoEF.Service.DTO_s.Genres;
 using MovieInfoEF.Service.DTO_s.Movie;
@@ -21,13 +27,20 @@ namespace MovieInfoEF.Service.Services
     public class MovieService : IMovieService
     {
         private readonly IMovieRepository _movieRepository;
+        private readonly IMovieHeroRepository _movieHeroRepository;
+        private readonly IMovieDrectorsRepository _movieDirectorRepository;
+        private readonly IMoviGenresRepository _movieGenreRepository;
         private readonly AppDbContext _appDbContext;
         private readonly IMapper _mapper;
         public MovieService()
         {
             _appDbContext = new AppDbContext();
             _movieRepository = new MovieRepository(_appDbContext);
+            _movieHeroRepository = new MovieHeroRepository(_appDbContext);
+            _movieDirectorRepository = new MovieDirectorsRepository(_appDbContext);
+            _movieGenreRepository = new MovieGenresRepository(_appDbContext);
             _mapper = new Mapper(new MapperConfiguration(p => p.AddProfile<MappingProfile>()));
+
         }
         public  async Task<MovieViewModel> CreateAsync(MovieCreateDto dto)
         {
@@ -59,6 +72,32 @@ namespace MovieInfoEF.Service.Services
         {
             var result = _movieRepository.GetAll(expression);
             return Task.FromResult(_mapper.Map<IEnumerable<MovieViewModel>>(result));
+        }
+
+        public async Task<IEnumerable<MovieFullInfoViewDto>> GetAllMovieInfAsync(Expression<Func<Movie, bool>>? expression = null)
+        {
+            var moviesInfo = new List<MovieFullInfoViewDto>();
+
+            var movies = _movieRepository.GetAll(expression);
+
+            foreach (var movie in movies)
+            {
+                var actors = _movieHeroRepository.GetAll(p => p.MovieId == movie.Id);
+                var actorlar = actors.Include(p => p.Actor).Select(p=> p.Actor);
+
+                var directors = _movieDirectorRepository.GetAll(p => p.MovieId == movie.Id).Select(p => p.Director);
+                var genres = _movieGenreRepository.GetAll(p => p.MovieId == movie.Id).Select(p => p.Genres);
+
+                var movieInfo = _mapper.Map<MovieFullInfoViewDto>(movie);
+                movieInfo.Actors = _mapper.Map<List<ActorViewModel>>(actorlar);
+                movieInfo.Directors = _mapper.Map<List<DirectorViewModel>>(directors);
+                movieInfo.Genres = _mapper.Map<List<GenreViewModel>>(genres);
+
+                moviesInfo.Add(movieInfo);
+            }
+
+            return moviesInfo;
+           
         }
 
         public async Task<MovieViewModel?> GetAsync(Expression<Func<Movie, bool>> expression)

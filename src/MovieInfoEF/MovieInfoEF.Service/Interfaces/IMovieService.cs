@@ -21,5 +21,7 @@ namespace MovieInfoEF.Service.Interfaces
         Task<MovieViewModel?> GetAsync(Expression<Func<Movie, bool>> expression);
 
         Task<IEnumerable<MovieViewModel>> GetAllAsync(Expression<Func<Movie, bool>>? expression = null);
+
+        Task<IEnumerable<MovieFullInfoViewDto>> GetAllMovieInfAsync(Expression<Func<Movie, bool>>? expression = null);  
     }
 }

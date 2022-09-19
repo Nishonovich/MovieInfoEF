@@ -11,15 +11,22 @@ namespace MovieInfoEF.Service.DTO_s.User
 {
     public class UserCreateDto
     {
-       
+
+        [MaxLength(32)]
         public String FirstName { get; set; } = String.Empty;
+        [MaxLength(32)]
         public String LastName { get; set; } = String.Empty;
+        [DefaultValue(true)]
         public bool? Gender { get; set; }
         public DateOnly BirthDate { get; set; }
+        [EmailAddress, MaxLength(50)]
         public String Email { get; set; } = String.Empty;
+        [Phone, MaxLength(13)]
         public String PhoneNumber { get; set; } = String.Empty;
+        [MinLength(6)]
         public String Login { get; set; } = String.Empty;
         public String Password { get; set; } = String.Empty;
+
         public UserPosit UserPosit { get; set; }
     }
 }
