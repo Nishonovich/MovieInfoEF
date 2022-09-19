@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieInfoEF.Data.Repositories.MovieHeros
 {
-    internal interface IMovieHeroRepository : IGenericRepository<MovieHero>
+    public interface IMovieHeroRepository : IGenericRepository<MovieHero>
     {
     }
 }

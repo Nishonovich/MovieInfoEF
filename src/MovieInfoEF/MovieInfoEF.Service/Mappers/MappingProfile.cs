@@ -36,6 +36,8 @@ namespace MovieInfoEF.Service.Mappers
             CreateMap<User, UserCreateDto>().ReverseMap();
             CreateMap<User, UserViewModel>().ReverseMap();
             CreateMap<IQueryable<User>, List<UserViewModel>>().ReverseMap();
+
+            CreateMap<Movie, MovieFullInfoViewDto>().ReverseMap();
         }
     }
 }

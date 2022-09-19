@@ -5,6 +5,8 @@ using MovieInfoEF.Service.DTO_s.Actors;
 using MovieInfoEF.Service.DTO_s.Director;
 using MovieInfoEF.Service.DTO_s.Genres;
 using MovieInfoEF.Service.DTO_s.Movie;
+using MovieInfoEF.Service.DTO_s.User;
+using MovieInfoEF.Service.Extensions;
 using MovieInfoEF.Service.Interfaces;
 using MovieInfoEF.Service.Services;
 using System;
@@ -174,7 +176,36 @@ public class Program
         //Console.WriteLine(getUp.Name);
 
 
+        IUserService userService = new UserService();
 
+        //var result = await userService.CreateAsync(new UserCreateDto()
+        //{
+        //    LastName = "Eshmamatov",
+        //    FirstName = "Komil",
+        //    PhoneNumber = "+998931266567",
+        //    Email = "nimadiremas@gmail.com",
+        //    BirthDate = DateOnly.Parse("1980-12-21"),
+        //    Gender = true,
+        //    Login = "Login123",
+        //    Password = "password1"
+        //});
+
+        //Console.WriteLine(result.LastName + " " + result.LastName + " " + result.Password + " " + result.Password);
+
+
+        var moviesAllInfo = await movieService.GetAllMovieInfAsync();
+
+        foreach (var movie in moviesAllInfo)
+        {
+            Console.WriteLine(movie.Name + "\n Actors: ");
+            foreach (var actor in movie.Actors)
+            {
+                Console.WriteLine(actor.FirstName);
+            }
+        }
+
+        //string kalit = Guid.NewGuid().ToString();
+        //Console.WriteLine(kalit);
 
 
 

@@ -5,6 +5,7 @@ using MovieInfoEF.Data.Repositories.Users;
 using MovieInfoEF.Domain.Models;
 using MovieInfoEF.Service.DTO_s.Actors;
 using MovieInfoEF.Service.DTO_s.User;
+using MovieInfoEF.Service.Extensions;
 using MovieInfoEF.Service.Interfaces;
 using MovieInfoEF.Service.Mappers;
 using System;
@@ -32,15 +33,20 @@ namespace MovieInfoEF.Service.Services
 
         public async Task<UserViewModel> CreateAsync(UserCreateDto dto)
         {
-            var user = await _userRepository.GetAsync(p => p.FirstName.Equals(dto.FirstName)
-                         && p.LastName.Equals(dto.LastName) && p.BirthDate.Equals(dto.BirthDate));
+            var user = await _userRepository.GetAsync(p => (p.FirstName.Equals(dto.FirstName)
+                         && p.LastName.Equals(dto.LastName) && p.BirthDate.Equals(dto.BirthDate)) || 
+                         p.Email.Equals(dto.Email) || p.PhoneNumber.Equals(dto.PhoneNumber) || p.Login.Equals(dto.Login));
 
             if (user is not null)
                 throw new Exception("User Mavjud ");
 
-            var newUser = await _userRepository.CreateAsync(_mapper.Map<User>(dto));
-            newUser.CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow);
-            _appDbContext.SaveChanges();
+            var mapped = _mapper.Map<User>(dto);
+            mapped.Password = mapped.Password.Hash();
+            mapped.CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow);
+
+            var newUser = await _userRepository.CreateAsync(mapped);
+            await _appDbContext.SaveChangesAsync();
+
             return _mapper.Map<UserViewModel>(newUser);
         }
 
